@@ -1,0 +1,1 @@
+https://example.com/services/oauth2/token?grant_type=password&client_id=<Your-client-id>&client_secret=<Your-client-secret>&username=<your-salesforce-username>&password=<your-sales-force-password><Sales-force-security-key>
