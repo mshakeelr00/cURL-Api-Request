@@ -1,0 +1,38 @@
+// set up the CURL request
+			$ch = curl_init();
+			
+			if(!empty($search_name))
+			{
+				$searchcriteria = "FirstName='".$search_name."'";
+			}
+			elseif(!empty($search_zip))
+			{
+				$searchcriteria = "MailingPostalCode='".$search_zip."'";
+			}
+			else
+			{
+				$searchcriteria = "FirstName='".$search_name."'+AND+MailingPostalCode='".$search_zip."'";
+			}
+			
+			$soql = "SELECT+Id,FirstName,LastName,MailingStreet,MailingCity,MailingState,MailingPostalCode,MailingCountry+from+Contact+WHERE+".$searchcriteria;
+			$url = "https://example.com/services/data/v57.0/query/?q=".$soql;
+			
+			
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer 00000000000000000000000000000000000000000000000000000000000000000"));
+			
+			// execute the request
+			$response = curl_exec($ch);
+			
+			// check for errors
+			if (curl_errno($ch)) {
+				echo 'Error: ' . curl_error($ch);
+			} else {
+				// process the response
+				$data = json_decode($response, true);
+				
+			}
+			
+			// close the CURL request
+			curl_close($ch);
